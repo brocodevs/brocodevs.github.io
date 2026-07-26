@@ -1,0 +1,14 @@
+{
+  "posts": [
+    {
+      "slug": "hi-lol",
+      "title": "Hi lol",
+      "subtitle": "The beginning.",
+      "date": "2026-07-26",
+      "tags": [
+        "meta"
+      ],
+      "image": "hi-lol/cover.jpg"
+    }
+  ]
+}

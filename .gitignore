@@ -1,0 +1,13 @@
+view/
+helper.*
+*.preclean
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+*.log
+__pycache__/
