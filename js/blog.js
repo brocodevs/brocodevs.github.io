@@ -1,7 +1,7 @@
-import { initUI } from "./ui.js";
+import { initUI } from "/js/ui.js";
 
-const POSTS_JSON_URL = "./posts/posts.json";
-const POSTS_DIR = "./posts/";
+const POSTS_JSON_URL = "/posts/posts.json";
+const POSTS_DIR = "/posts/";
 const POST_BODY_CACHE = new Map();
 
 const state = {
@@ -131,8 +131,8 @@ function resolvePostImageUrl(image) {
   if (/^https?:\/\//i.test(s)) return s;
   if (s.startsWith("/")) return s;
   if (s.startsWith("./") || s.startsWith("../")) return s;
-  if (s.startsWith("posts/")) return "./" + s;
-  return "./posts/" + s;
+  if (s.startsWith("posts/")) return "/" + s;
+  return "/posts/" + s;
 }
 
 function cacheElements() {
