@@ -307,7 +307,7 @@ function onDockNavClick(e) {
   if (isArticle) {
     navigateToList();
   } else {
-    window.location.href = "./";
+    window.location.href = "/";
   }
 }
 
