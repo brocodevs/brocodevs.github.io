@@ -1,590 +1,297 @@
 <!doctype html>
 <html lang="en" data-theme="dark">
-  <head>
-    <script>
-      (function () {
-        try {
-          var t = localStorage.getItem("brocodev-theme");
-          if (t !== "dark" && t !== "light") t = "dark";
-          document.documentElement.setAttribute("data-theme", t);
-        } catch (e) {
-          document.documentElement.setAttribute("data-theme", "dark");
-        }
-      })();
-    </script>
 
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
-    />
-    <title>BrocoDev</title>
-    <meta
-      name="description"
-      content="Developer & designer based in Vancouver, BC."
-    />
+<head>
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("brocodev-theme");
+        if (t !== "dark" && t !== "light") t = "dark";
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+      document.documentElement.classList.add("has-reveal");
+    })();
+  </script>
 
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="BrocoDev" />
-    <meta
-      property="og:description"
-      content="Developer & designer based in Vancouver, BC."
-    />
-    <meta property="og:image" content="./assets/images/pfp.webp" />
-    <meta name="theme-color" content="#08090C" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Christian</title>
+  <meta name="description"
+    content="Christian (BrocoDev) is a developer and designer in Vancouver, BC, building and designing multi-platform software experiences." />
 
-    <link rel="icon" type="image/png" href="./assets/images/favicon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Christian / BrocoDev" />
+  <meta property="og:url" content="https://brocodev.cc/" />
+  <meta property="og:title" content="Christian" />
+  <meta property="og:description" content="Developer and designer based in Vancouver, BC." />
+  <meta property="og:image" content="https://brocodev.cc/banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1698" />
+  <meta property="og:image:height" content="1166" />
+  <meta property="og:image:alt" content="Christian / BrocoDev" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
-      rel="stylesheet"
-    />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Christian" />
+  <meta name="twitter:description" content="Developer and designer based in Vancouver, BC." />
+  <meta name="twitter:image" content="https://brocodev.cc/banner.png" />
+  <meta name="twitter:image:alt" content="Christian / BrocoDev" />
 
-    <script
-      src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"
-      defer
-    ></script>
+  <meta name="theme-color" content="#0b0d10" />
 
-    <script
-      src="https://api.iconify.design/devicon-plain/unity,csharp,archlinux,fedora,arduino,objectivec,javascript,capacitor,photoshop,flutter,xcode.js"
-      defer
-    ></script>
+  <link rel="icon" type="image/png" href="./assets/images/favicon.png" />
 
-    <link
-      rel="preload"
-      as="image"
-      href="./assets/images/pfp.webp"
-      type="image/webp"
-      fetchpriority="high"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href="./assets/images/bg_dark.webp"
-      type="image/webp"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href="./assets/images/bg.webp"
-      type="image/webp"
-    />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+    rel="stylesheet" />
 
-    <link rel="stylesheet" href="styles.css" />
-  </head>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js" defer></script>
 
-  <body>
-    <main class="snap-container" id="snap-main">
-      <section class="snap-section" id="home">
-        <div class="hero-avatar-wrapper">
-          <img
-            src="./assets/images/pfp.webp"
-            alt="Christian"
-            class="hero-avatar-img"
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-            width="140"
-            height="140"
-          />
-        </div>
+  <link rel="preload" as="image" href="./assets/images/pfp.webp" type="image/webp" fetchpriority="high" />
 
-        <h1 class="hero-name-lg">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true">
+    <span class="scroll-progress-bar"></span>
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-inner">
+        <h1 class="hero-title" data-reveal>Hi, I'm Christian.</h1>
+
+        <p class="hero-role" data-reveal data-reveal-delay="1">
           <span id="typing-text"></span><span class="typing-cursor"></span>
-        </h1>
-
-        <div class="hero-socials-hstack">
-          <div
-            class="socials-expand-root btn-pill"
-            role="button"
-            tabindex="0"
-            aria-expanded="false"
-            aria-label="Toggle social links"
-          >
-            <iconify-icon
-              class="socials-label-icon"
-              icon="solar:link-square-bold-duotone"
-            ></iconify-icon>
-            <div
-              class="socials-expand-btns"
-              role="group"
-              aria-label="Social media links"
-            >
-              <a
-                href="https://x.com/brocodevs"
-                target="_blank"
-                class="hero-social-icon-btn"
-                title="X / Twitter"
-                style="--stagger: 0ms"
-              >
-                <iconify-icon icon="mingcute:social-x-line"></iconify-icon>
-              </a>
-              <a
-                href="https://github.com/brocodevs"
-                target="_blank"
-                class="hero-social-icon-btn"
-                title="GitHub"
-                style="--stagger: 30ms"
-              >
-                <iconify-icon icon="mingcute:github-line"></iconify-icon>
-              </a>
-              <a
-                href="https://www.youtube.com/@brocodev"
-                target="_blank"
-                class="hero-social-icon-btn"
-                title="YouTube"
-                style="--stagger: 60ms"
-              >
-                <iconify-icon icon="mingcute:youtube-line"></iconify-icon>
-              </a>
-              <a
-                href="https://instagram.com/brocodevs"
-                target="_blank"
-                class="hero-social-icon-btn"
-                title="Instagram"
-                style="--stagger: 120ms"
-              >
-                <iconify-icon icon="mingcute:ins-line"></iconify-icon>
-              </a>
-            </div>
-            <button class="socials-close-btn" aria-label="Close social links">
-              <iconify-icon icon="mingcute:close-fill"></iconify-icon>
-            </button>
-          </div>
-        </div>
-
-        <div
-          class="hero-scroll-btn-wrapper"
-          onclick="scrollToSection('about')"
-          title="Scroll Down"
-        >
-          <button class="" style="padding: 0.45rem 0.9rem; font-size: 0.75rem">
-            <iconify-icon
-              icon="solar:alt-arrow-down-bold-duotone"
-              style="font-size: 2rem"
-            ></iconify-icon>
-          </button>
-        </div>
-      </section>
-
-      <section class="snap-section" id="about">
-        <h2 class="section-title-lg">About & Background</h2>
-        <p class="section-sub-lg" style="margin-bottom: 2.25rem">
-          Bringing ambitious ideas to life in Vancouver, BC
         </p>
 
-        <div class="about-card-clean">
-          <p class="about-lead-text">
-            Christian <span class="highlight">(BrocoDev)</span> is a 17-year-old
-            developer & designer. Founder of
-            <span class="highlight">BrocoLabs</span>, building multi-platform
-            utilities, browser extensions, games, and more.
+        <p class="hero-lede" data-reveal data-reveal-delay="2">
+          High school senior, developing and designing building multi-platform software, apps, and games. Founder of
+          <strong>BrocoLabs</strong>.
+        </p>
+
+        <a class="hero-now" id="hero-now" href="https://www.last.fm/user/BrocoDev" target="_blank"
+          rel="noopener noreferrer" hidden>
+          <img class="hero-now-cover" id="hero-now-cover" alt="" hidden />
+          <span class="hero-now-dot" aria-hidden="true"></span>
+          <span class="hero-now-text" id="hero-now-text"></span>
+          <span class="hero-now-time" id="hero-now-time"></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <h2 class="section-title">Background</h2>
+        </div>
+
+        <div class="about-text" data-reveal>
+          <p>
+            I'm Christian, a developer and designer based in Vancouver,
+            British Columbia.
           </p>
-
-          <div class="logo-marquee-wrapper">
-            <div class="logo-marquee-track">
-              <div class="logo-marquee-group">
-                <iconify-icon
-                  icon="devicon-plain:unity"
-                  title="Unity"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:csharp"
-                  title="C#"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:archlinux"
-                  title="Arch Linux"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:fedora"
-                  title="Fedora"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:arduino"
-                  title="Arduino"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:objectivec"
-                  title="Objective-C"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:javascript"
-                  title="JavaScript"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:capacitor"
-                  title="Capacitor"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:photoshop"
-                  title="Photoshop"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:flutter"
-                  title="Flutter"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:xcode"
-                  title="Xcode"
-                ></iconify-icon>
-              </div>
-              <div class="logo-marquee-group" aria-hidden="true">
-                <iconify-icon
-                  icon="devicon-plain:unity"
-                  title="Unity"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:csharp"
-                  title="C#"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:archlinux"
-                  title="Arch Linux"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:fedora"
-                  title="Fedora"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:arduino"
-                  title="Arduino"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:objectivec"
-                  title="Objective-C"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:javascript"
-                  title="JavaScript"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:capacitor"
-                  title="Capacitor"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:photoshop"
-                  title="Photoshop"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:flutter"
-                  title="Flutter"
-                ></iconify-icon>
-                <iconify-icon
-                  icon="devicon-plain:xcode"
-                  title="Xcode"
-                ></iconify-icon>
-              </div>
-            </div>
-          </div>
+          <p>
+            I'm the founder of <strong>BrocoLabs</strong>, a banner I release
+            projects under. My work spans app
+            development, spanning systems tinkering and human interface design.
+          </p>
+          <p>
+            When I'm not building, I'm usually behind a camera, out with friends,
+            or producing/listening to music.
+          </p>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="snap-section" id="projects">
-        <h2 class="section-title-lg">Featured Projects</h2>
-        <p class="section-sub-lg">
-          Swipe or click arrows to explore Christian's software & apps
-        </p>
-
-        <div class="carousel-wrapper">
-          <div class="carousel-track" id="carousel-track">
-            <div class="carousel-card active">
-              <div
-                class="card-banner-bg"
-                style="
-                  background-image: url(&quot;./assets/banners/prismbanner.webp&quot;);
-                "
-              ></div>
-              <div class="card-top-header">
-                <div class="carousel-card-icon-img-wrapper">
-                  <img
-                    src="./assets/icons/prismicon.webp"
-                    alt="Prism Icon"
-                    class="carousel-card-icon-img"
-                  />
-                </div>
-                <span class="project-year-badge">2024 – 2025</span>
-              </div>
-              <div class="card-body-content">
-                <h3 class="carousel-card-title">Prism</h3>
-                <p class="carousel-card-desc">
-                  iOS customization tool built natively in Swift and Obj-C for
-                  home screen personalization & widgets using private APIs.
-                </p>
-              </div>
-              <a
-                href="https://prismios.github.io/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn-pill solid-accent btn-prism"
-                style="font-size: 0.8rem; padding: 0.45rem 1rem"
-                >View Project</a
-              >
-            </div>
-
-            <div class="carousel-card next">
-              <div
-                class="card-banner-bg"
-                style="
-                  background-image: url(&quot;./assets/banners/kojibanner.webp&quot;);
-                "
-              ></div>
-              <div class="card-top-header">
-                <div class="carousel-card-icon-img-wrapper">
-                  <img
-                    src="./assets/icons/kojiicon.webp"
-                    alt="Koji Icon"
-                    class="carousel-card-icon-img"
-                  />
-                </div>
-                <span class="project-year-badge">2026 – Present</span>
-              </div>
-              <div class="card-body-content">
-                <h3 class="carousel-card-title">Koji</h3>
-                <p class="carousel-card-desc">
-                  Sleek Android emulation launcher & social frontend tailored
-                  for AYN handheld gaming devices that recreates 3DS nostalgia
-                  with modern polish.
-                </p>
-              </div>
-              <a
-                href="https://kojifrontend.github.io/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn-pill solid-accent btn-koji"
-                style="font-size: 0.8rem; padding: 0.45rem 1rem"
-                >View Project</a
-              >
-            </div>
-
-            <div class="carousel-card hidden">
-              <div
-                class="card-banner-bg"
-                style="
-                  background-image: url(&quot;./assets/banners/visiontabbanner.webp&quot;);
-                "
-              ></div>
-              <div class="card-top-header">
-                <div class="carousel-card-icon-img-wrapper">
-                  <img
-                    src="./assets/icons/visiontabicon.webp"
-                    alt="VisionTab Icon"
-                    class="carousel-card-icon-img"
-                  />
-                </div>
-                <span class="project-year-badge">2024</span>
-              </div>
-              <div class="card-body-content">
-                <h3 class="carousel-card-title">VisionTab</h3>
-                <p class="carousel-card-desc">
-                  Chromium-based browser new-tab theming & productivity
-                  extension. Collaboration with KewlAid.
-                </p>
-              </div>
-              <a
-                href="https://github.com/brocodevs/VisionTab"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn-pill solid-accent btn-visiontab"
-                style="font-size: 0.8rem; padding: 0.45rem 1rem"
-                >View Project</a
-              >
-            </div>
-
-            <div class="carousel-card hidden">
-              <div
-                class="card-banner-bg"
-                style="
-                  background-image: url(&quot;./assets/banners/wildwoodsbanner.webp&quot;);
-                "
-              ></div>
-              <div class="card-top-header">
-                <div class="carousel-card-icon-img-wrapper">
-                  <img
-                    src="./assets/icons/wildwoodsicon.webp"
-                    alt="Wild Woods Icon"
-                    class="carousel-card-icon-img"
-                  />
-                </div>
-                <span class="project-year-badge">2023</span>
-              </div>
-              <div class="card-body-content">
-                <h3 class="carousel-card-title">Wild Woods</h3>
-                <p class="carousel-card-desc">
-                  Atmospheric indie game created at UTG Academy in partnership
-                  with a professional game developer and peers.
-                </p>
-              </div>
-              <a
-                href="https://brocodev.itch.io/wild-woods"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn-pill solid-accent btn-wildwoods"
-                style="font-size: 0.8rem; padding: 0.45rem 1rem"
-                >View Project</a
-              >
-            </div>
-
-            <div class="carousel-card prev">
-              <div
-                class="card-banner-bg"
-                style="
-                  background-image: url(&quot;./assets/banners/brocolabsbanner.webp&quot;);
-                "
-              ></div>
-              <div class="card-top-header">
-                <div class="carousel-card-icon-img-wrapper">
-                  <img
-                    src="./assets/icons/brocolabsicon.webp"
-                    alt="BrocoLabs Icon"
-                    class="carousel-card-icon-img"
-                  />
-                </div>
-                <span class="project-year-badge">2025 – Present</span>
-              </div>
-              <div class="card-body-content">
-                <h3 class="carousel-card-title">BrocoLabs</h3>
-                <p class="carousel-card-desc">
-                  The "brand" that I release projects under, fostering community
-                  via unique software with creative, stunning user interfaces.
-                </p>
-              </div>
-              <a
-                href="https://dsc.gg/brocolabs"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn-pill solid-accent btn-brocolabs"
-                style="font-size: 0.8rem; padding: 0.45rem 1rem"
-                >Join Discord</a
-              >
-            </div>
-          </div>
+    <section class="section" id="work">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <h2 class="section-title">Selected projects</h2>
         </div>
 
-        <div class="carousel-controls">
-          <button
-            class="carousel-arrow"
-            id="carousel-prev"
-            title="Previous Project"
-          >
-            <iconify-icon
-              icon="solar:alt-arrow-left-bold-duotone"
-            ></iconify-icon>
-          </button>
-          <div class="carousel-dots" id="carousel-dots">
-            <span class="carousel-dot active"></span>
-            <span class="carousel-dot"></span>
-            <span class="carousel-dot"></span>
-            <span class="carousel-dot"></span>
-            <span class="carousel-dot"></span>
-          </div>
-          <button
-            class="carousel-arrow"
-            id="carousel-next"
-            title="Next Project"
-          >
-            <iconify-icon
-              icon="solar:alt-arrow-right-bold-duotone"
-            ></iconify-icon>
-          </button>
-        </div>
-      </section>
-
-      <section class="snap-section" id="connect">
-        <h2 class="section-title-lg">Let's Connect</h2>
-        <p class="section-sub-lg">
-          Get in touch for software engineering, design, or collaborations
-        </p>
-
-        <div class="connect-center-box">
-          <a
-            href="mailto:brocodevelops@gmail.com"
-            class="btn-pill solid-accent"
-            style="font-size: 1.1rem; padding: 1rem 2rem"
-          >
-            <iconify-icon icon="solar:letter-bold-duotone"></iconify-icon>
-            <span>brocodevelops@gmail.com</span>
+        <div class="work-list">
+          <a class="work-card" href="https://prismios.github.io/" target="_blank" rel="noopener noreferrer" data-reveal>
+            <span class="work-icon">
+              <img src="./assets/icons/prismicon.webp" alt="" loading="lazy" decoding="async" />
+            </span>
+            <span class="work-body">
+              <span class="work-card-heading">
+                <span class="work-title">Prism</span>
+                <span class="work-year">2024 to 2025</span>
+              </span>
+              <span class="work-desc">
+                iOS 26+ customization tool for icon theming via widgets and private APIs. Built natively and focused on
+                deep system integration.
+              </span>
+            </span>
+            <span class="work-more" aria-hidden="true">
+              <iconify-icon icon="solar:alt-arrow-right-bold-duotone"></iconify-icon>
+            </span>
           </a>
 
-          <div class="vancouver-time-row">
-            <span>Vancouver, BC</span>
-            <span style="opacity: 0.4">•</span>
-            <span
-              class="font-mono"
-              id="live-clock"
-              style="color: var(--accent-primary); font-weight: 700"
-              >00:00:00 AM</span
-            >
-          </div>
+          <a class="work-card" href="https://kojifrontend.github.io/" target="_blank" rel="noopener noreferrer"
+            data-reveal>
+            <span class="work-icon">
+              <img src="./assets/icons/kojiicon.webp" alt="" loading="lazy" decoding="async" />
+            </span>
+            <span class="work-body">
+              <span class="work-card-heading">
+                <span class="work-title">Koji</span>
+                <span class="work-year">2026 to present</span>
+              </span>
+              <span class="work-desc">
+                A sleek Android emulation launcher and social frontend for
+                handheld gaming devices, rekindling handheld nostalgia with
+                modern polish.
+              </span>
+            </span>
+            <span class="work-more" aria-hidden="true">
+              <iconify-icon icon="solar:alt-arrow-right-bold-duotone"></iconify-icon>
+            </span>
+          </a>
+
+          <a class="work-card" href="https://github.com/brocodevs/VisionTab" target="_blank" rel="noopener noreferrer"
+            data-reveal>
+            <span class="work-icon">
+              <img src="./assets/icons/visiontabicon.webp" alt="" loading="lazy" decoding="async" />
+            </span>
+            <span class="work-body">
+              <span class="work-card-heading">
+                <span class="work-title">VisionTab</span>
+                <span class="work-year">2024</span>
+              </span>
+              <span class="work-desc">
+                A browser new-tab theming and productivity extension, made in
+                collaboration with KewlAid.
+              </span>
+            </span>
+            <span class="work-more" aria-hidden="true">
+              <iconify-icon icon="solar:alt-arrow-right-bold-duotone"></iconify-icon>
+            </span>
+          </a>
+
+          <a class="work-card" href="https://brocodev.itch.io/wild-woods" target="_blank" rel="noopener noreferrer"
+            data-reveal>
+            <span class="work-icon">
+              <img src="./assets/icons/wildwoodsicon.webp" alt="" loading="lazy" decoding="async" />
+            </span>
+            <span class="work-body">
+              <span class="work-card-heading">
+                <span class="work-title">Wild Woods</span>
+                <span class="work-year">2023</span>
+              </span>
+              <span class="work-desc">
+                An atmospheric indie game created at UTG Academy alongside a
+                professional game developer and peers.
+              </span>
+            </span>
+            <span class="work-more" aria-hidden="true">
+              <iconify-icon icon="solar:alt-arrow-right-bold-duotone"></iconify-icon>
+            </span>
+          </a>
+
+          <a class="work-card" href="https://dsc.gg/brocolabs" target="_blank" rel="noopener noreferrer" data-reveal>
+            <span class="work-icon">
+              <img src="./assets/icons/brocolabsicon.webp" alt="" loading="lazy" decoding="async" />
+            </span>
+            <span class="work-body">
+              <span class="work-card-heading">
+                <span class="work-title">BrocoLabs</span>
+                <span class="work-year">2025 to present</span>
+              </span>
+              <span class="work-desc">
+                The label I release projects under, with a community
+                built around thoughtful software and polished interfaces.
+              </span>
+            </span>
+            <span class="work-more" aria-hidden="true">
+              <iconify-icon icon="solar:alt-arrow-right-bold-duotone"></iconify-icon>
+            </span>
+          </a>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
 
-    <div class="progressive-blur-container" aria-hidden="true">
-      <div class="blur-filter"></div>
-      <div class="blur-filter"></div>
-      <div class="blur-filter"></div>
-      <div class="blur-filter"></div>
-      <div class="blur-filter"></div>
-    </div>
+    <section class="section" id="creations">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <h2 class="section-title">Creations</h2>
+        </div>
 
-    <nav class="dock-container" aria-label="Dock navigation">
-      <button
-        class="dock-item is-active"
-        onclick="scrollToSection('home')"
-        title="Home"
-      >
-        <iconify-icon icon="solar:home-angle-bold-duotone"></iconify-icon>
-      </button>
-      <button
-        class="dock-item"
-        onclick="scrollToSection('about')"
-        title="About"
-      >
-        <iconify-icon icon="solar:user-bold-duotone"></iconify-icon>
-      </button>
-      <button
-        class="dock-item"
-        onclick="scrollToSection('projects')"
-        title="Projects"
-      >
-        <iconify-icon
-          icon="solar:folder-with-files-bold-duotone"
-        ></iconify-icon>
-      </button>
-      <a href="/blog/" class="dock-item" title="Blog">
-        <iconify-icon
-          icon="solar:notebook-bookmark-bold-duotone"
-        ></iconify-icon>
-      </a>
-      <button
-        class="dock-item"
-        onclick="scrollToSection('connect')"
-        title="Connect"
-      >
-        <iconify-icon
-          icon="solar:users-group-rounded-bold-duotone"
-        ></iconify-icon>
-      </button>
-      <button class="dock-item" id="dock-theme-btn" title="Toggle Theme">
-        <span class="dock-theme-icons">
-          <iconify-icon
-            icon="solar:sun-2-bold-duotone"
-            class="theme-icon theme-icon-sun"
-          ></iconify-icon>
-          <iconify-icon
-            icon="solar:moon-stars-bold-duotone"
-            class="theme-icon theme-icon-moon"
-          ></iconify-icon>
-        </span>
-      </button>
-    </nav>
+        <div class="carousel" data-gallery="creations" data-reveal></div>
+      </div>
+    </section>
 
-    <div class="wallpaper wallpaper-dark" aria-hidden="true"></div>
-    <div class="wallpaper wallpaper-light" aria-hidden="true"></div>
+    <section class="section" id="life">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <h2 class="section-title">Life</h2>
+        </div>
 
-    <script type="module" src="js/main.js"></script>
-  </body>
+        <div class="carousel carousel--reverse" data-gallery="life" data-reveal></div>
+      </div>
+    </section>
+
+    <section class="section" id="notes">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <h2 class="section-title">Notes</h2>
+        </div>
+
+        <div class="notes-list" id="notes-list" data-reveal></div>
+        <p class="notes-empty" id="notes-empty" hidden>
+          Nothing published yet.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Image preview">
+    <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+  </dialog>
+
+  <div class="progressive-blur" aria-hidden="true">
+    <span class="pb-layer" style="--blur: 2px; --from: 0%; --to: 32%"></span>
+    <span class="pb-layer" style="--blur: 5px; --from: 14%; --to: 54%"></span>
+    <span class="pb-layer" style="--blur: 11px; --from: 34%; --to: 76%"></span>
+    <span class="pb-layer" style="--blur: 20px; --from: 58%; --to: 100%"></span>
+  </div>
+
+  <nav class="dock" aria-label="Social links">
+    <a class="dock-item" href="https://x.com/brocodevs" target="_blank" rel="noopener noreferrer" data-tip="X"
+      aria-label="X">
+      <iconify-icon icon="mingcute:social-x-line"></iconify-icon>
+    </a>
+    <a class="dock-item" href="https://github.com/brocodevs" target="_blank" rel="noopener noreferrer" data-tip="GitHub"
+      aria-label="GitHub">
+      <iconify-icon icon="mingcute:github-line"></iconify-icon>
+    </a>
+    <a class="dock-item" href="https://www.youtube.com/@brocodev" target="_blank" rel="noopener noreferrer"
+      data-tip="YouTube" aria-label="YouTube">
+      <iconify-icon icon="mingcute:youtube-line"></iconify-icon>
+    </a>
+    <a class="dock-item" href="https://instagram.com/brocodevs" target="_blank" rel="noopener noreferrer"
+      data-tip="Instagram" aria-label="Instagram">
+      <iconify-icon icon="mingcute:ins-line"></iconify-icon>
+    </a>
+    <a class="dock-item" href="mailto:brocodevelops@gmail.com" data-tip="Email" aria-label="Email">
+      <iconify-icon icon="mingcute:mail-line"></iconify-icon>
+    </a>
+    <span class="dock-divider" aria-hidden="true"></span>
+    <button class="dock-item" id="dock-theme-btn" type="button" data-tip="Theme" aria-label="Toggle theme">
+      <span class="dock-theme-icons">
+        <iconify-icon icon="solar:sun-2-bold-duotone" class="theme-icon theme-icon-sun"></iconify-icon>
+        <iconify-icon icon="solar:moon-stars-bold-duotone" class="theme-icon theme-icon-moon"></iconify-icon>
+      </span>
+    </button>
+  </nav>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+
 </html>

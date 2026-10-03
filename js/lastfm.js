@@ -1,108 +1,98 @@
-const CACHE_KEY = "brocodev-lastfm-recent-v2";
-const CACHE_TTL_MS = 30 * 60 * 1000;
-const WORKER_URL = "https://lastfm.broco.workers.dev/api/recent";
-const MAX_RETRIES = 2;
-const BACKOFF_BASE_MS = 800;
+const LASTFM_WORKER_URL = "https://lastfm.broco.workers.dev/";
 
-try {
-  localStorage.removeItem(CACHE_KEY);
-  localStorage.removeItem("brocodev-lastfm-recent-v1");
-} catch (_) {}
+const REFRESH_MS = 60000;
 
-function readCache() {
-  try {
-    const raw = localStorage.getItem(CACHE_KEY);
-    if (!raw) return null;
-    const payload = JSON.parse(raw);
-    if (!payload || typeof payload.ts !== "number") return null;
-    if (Date.now() - payload.ts > CACHE_TTL_MS) return null;
-    return payload.data || null;
-  } catch (_) {
-    return null;
+function relativeTime(utsSeconds) {
+  const then = Number(utsSeconds) * 1000;
+  if (!Number.isFinite(then)) return "";
+
+  const diff = Date.now() - then;
+  if (diff < 0) return "";
+
+  const mins = Math.floor(diff / 60000);
+  if (mins < 1) return "just now";
+  if (mins < 60) return `${mins}m ago`;
+
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return `${hours}h ago`;
+
+  const days = Math.floor(hours / 24);
+  if (days < 7) return `${days}d ago`;
+  if (days < 30) return `${Math.floor(days / 7)}w ago`;
+
+  return `${Math.floor(days / 30)}mo ago`;
+}
+
+function coverArt(track) {
+  const images = (track && track.image) || [];
+  const preferred = ["extralarge", "large", "medium", "small"];
+  for (const size of preferred) {
+    const match = images.find((img) => img && img.size === size);
+    const url = match && (match["#text"] || "");
+    if (url) return url;
   }
+  return "";
 }
 
-function writeCache(data) {
-  try {
-    localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data }));
-  } catch (_) {}
+function firstTrack(data) {
+  const tracks = data && data.recenttracks && data.recenttracks.track;
+  if (!tracks) return null;
+  return Array.isArray(tracks) ? tracks[0] || null : tracks;
 }
 
-function normalize(track) {
-  if (!track) return null;
-  const name = typeof track.name === "string" ? track.name.trim() : "";
-  const artist =
-    track.artist && typeof track.artist === "object"
-      ? (track.artist["#text"] || "").trim()
-      : "";
-  if (!name || !artist) return null;
-  const images = Array.isArray(track.image) ? track.image : [];
-  const cover =
-    (images.find((img) => img && img.size === "extralarge") ||
-      images.find((img) => img && img.size === "mega") ||
-      images.find((img) => img && img.size === "large") ||
-      images[images.length - 1] ||
-      {})["#text"] || "";
-  const nowPlaying = !!(track["@attr"] && track["@attr"].nowplaying === "true");
-  const date =
-    track.date && track.date.uts ? parseInt(track.date.uts, 10) * 1000 : null;
-  return {
-    title: name,
-    artist: artist,
-    album: (track.album && track.album["#text"]) || "",
-    cover,
-    nowPlaying,
-    url: typeof track.url === "string" ? track.url : "",
-    date,
-  };
-}
+export function initLastfm() {
+  const el = document.getElementById("hero-now");
+  const textEl = document.getElementById("hero-now-text");
+  const timeEl = document.getElementById("hero-now-time");
+  const coverEl = document.getElementById("hero-now-cover");
+  const dotEl = el && el.querySelector(".hero-now-dot");
+  if (!el || !textEl || !timeEl) return;
+  if (!LASTFM_WORKER_URL) return;
 
-async function fetchOnce() {
-  const resp = await fetch(WORKER_URL);
-  if (!resp.ok) {
-    const err = new Error("HTTP " + resp.status);
-    err.retryable = resp.status >= 500 || resp.status === 429;
-    throw err;
-  }
-  const json = await resp.json();
-  const rawTrack = json?.recenttracks?.track?.[0];
-  if (!rawTrack) return null;
+  let timer = null;
 
-  return normalize(rawTrack);
-}
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-export async function getRecent() {
-  const cached = readCache();
-  if (cached) return cached;
-
-  let lastErr = null;
-  let attemptsMade = 0;
-  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
-    attemptsMade = attempt + 1;
+  async function update() {
     try {
-      const data = await fetchOnce();
-      if (data) {
-        writeCache(data);
-        return data;
+      const res = await fetch(LASTFM_WORKER_URL, { cache: "no-store" });
+      if (!res.ok) throw new Error("worker error");
+      const data = await res.json();
+      const track = firstTrack(data);
+      if (!track || !track.name) throw new Error("no track");
+
+      const artist =
+        (track.artist && (track.artist["#text"] || track.artist)) || "";
+      const isNowPlaying = track["@attr"] && track["@attr"].nowplaying === "true";
+
+      textEl.textContent = artist ? `${track.name} · ${artist}` : track.name;
+      timeEl.textContent = isNowPlaying
+        ? "Now playing"
+        : relativeTime(track.date && track.date.uts);
+
+      const art = coverArt(track);
+      if (coverEl) {
+        if (art) coverEl.src = art;
+        coverEl.hidden = !art;
       }
+      if (dotEl) dotEl.hidden = Boolean(art);
 
-      return null;
-    } catch (err) {
-      lastErr = err;
-
-      if (err.retryable === false || attempt === MAX_RETRIES) break;
-
-      await sleep(BACKOFF_BASE_MS * Math.pow(2, attempt));
+      el.classList.toggle("is-live", Boolean(isNowPlaying));
+      el.href = track.url || "https://www.last.fm/user/BrocoDev";
+      el.hidden = false;
+    } catch (_) {
+      el.hidden = true;
     }
   }
 
-  console.error(
-    "[lastfm] Worker fetch failed after " + attemptsMade + " attempt(s):",
-    lastErr && lastErr.message ? lastErr.message : lastErr,
-  );
-  return null;
+  update();
+  timer = window.setInterval(update, REFRESH_MS);
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      if (timer) clearInterval(timer);
+      timer = null;
+    } else if (!timer) {
+      update();
+      timer = window.setInterval(update, REFRESH_MS);
+    }
+  });
 }

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("brocodev-theme");
+          if (t !== "dark" && t !== "light") t = "dark";
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Note · Christian / BrocoDev</title>
+    <meta name="description" content="A note from Christian / BrocoDev." />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Christian / BrocoDev" />
+    <meta property="og:title" content="Note · Christian / BrocoDev" />
+    <meta
+      property="og:description"
+      content="A note from Christian / BrocoDev."
+    />
+    <meta property="og:image" content="https://brocodev.cc/banner.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1698" />
+    <meta property="og:image:height" content="1166" />
+    <meta property="og:image:alt" content="Christian / BrocoDev" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Note · Christian / BrocoDev" />
+    <meta
+      name="twitter:description"
+      content="A note from Christian / BrocoDev."
+    />
+    <meta name="twitter:image" content="https://brocodev.cc/banner.png" />
+    <meta name="twitter:image:alt" content="Christian / BrocoDev" />
+
+    <meta name="theme-color" content="#0b0d10" />
+
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"
+      defer
+    ></script>
+
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+
+  <body class="note-body">
+    <main class="note-page">
+      <article class="note-detail-view">
+        <div class="note-detail-info">
+          <a class="note-back" href="/">
+            <iconify-icon
+              icon="solar:alt-arrow-left-bold-duotone"
+            ></iconify-icon>
+            Back
+          </a>
+          <h1 class="note-detail-title" id="note-title"></h1>
+          <p class="note-detail-subtitle" id="note-subtitle"></p>
+        </div>
+
+        <div class="note-detail-cover-block" id="note-cover-block" hidden>
+          <img id="note-cover" alt="" />
+        </div>
+
+        <div class="prose" id="note-content"></div>
+      </article>
+    </main>
+
+    <div class="progressive-blur" aria-hidden="true">
+      <span class="pb-layer" style="--blur: 2px; --from: 0%; --to: 32%"></span>
+      <span class="pb-layer" style="--blur: 5px; --from: 14%; --to: 54%"></span>
+      <span class="pb-layer" style="--blur: 11px; --from: 34%; --to: 76%"></span>
+      <span class="pb-layer" style="--blur: 20px; --from: 58%; --to: 100%"></span>
+    </div>
+
+    <nav class="dock" aria-label="Social links">
+      <a
+        class="dock-item"
+        href="https://x.com/brocodevs"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-tip="X"
+        aria-label="X"
+      >
+        <iconify-icon icon="mingcute:social-x-line"></iconify-icon>
+      </a>
+      <a
+        class="dock-item"
+        href="https://github.com/brocodevs"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-tip="GitHub"
+        aria-label="GitHub"
+      >
+        <iconify-icon icon="mingcute:github-line"></iconify-icon>
+      </a>
+      <a
+        class="dock-item"
+        href="https://www.youtube.com/@brocodev"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-tip="YouTube"
+        aria-label="YouTube"
+      >
+        <iconify-icon icon="mingcute:youtube-line"></iconify-icon>
+      </a>
+      <a
+        class="dock-item"
+        href="https://instagram.com/brocodevs"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-tip="Instagram"
+        aria-label="Instagram"
+      >
+        <iconify-icon icon="mingcute:ins-line"></iconify-icon>
+      </a>
+      <a
+        class="dock-item"
+        href="mailto:brocodevelops@gmail.com"
+        data-tip="Email"
+        aria-label="Email"
+      >
+        <iconify-icon icon="mingcute:mail-line"></iconify-icon>
+      </a>
+      <span class="dock-divider" aria-hidden="true"></span>
+      <button
+        class="dock-item"
+        id="dock-theme-btn"
+        type="button"
+        data-tip="Theme"
+        aria-label="Toggle theme"
+      >
+        <span class="dock-theme-icons">
+          <iconify-icon
+            icon="solar:sun-2-bold-duotone"
+            class="theme-icon theme-icon-sun"
+          ></iconify-icon>
+          <iconify-icon
+            icon="solar:moon-stars-bold-duotone"
+            class="theme-icon theme-icon-moon"
+          ></iconify-icon>
+        </span>
+      </button>
+    </nav>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"
+      defer
+    ></script>
+    <script type="module" src="/js/note.js"></script>
+  </body>
+</html>
