@@ -11,6 +11,7 @@
 
   --card-pad: 10px;
   --maxw: 640px;
+  --gutter: clamp(1.25rem, 5vw, 2rem);
   --dock-space: 116px;
 
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -135,7 +136,7 @@ img {
   width: 100%;
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 0 clamp(1.25rem, 5vw, 2rem);
+  padding: 0 var(--gutter);
 }
 
 .clock {
@@ -785,6 +786,12 @@ body.modal-open {
   max-height: 86vh;
   border-radius: var(--radius-lg);
   box-shadow: 0 40px 90px -40px rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  transition: opacity 0.22s var(--ease);
+}
+
+.lightbox-img[src]:not([src=""]) {
+  opacity: 1;
 }
 
 body.note-body {
@@ -1066,6 +1073,11 @@ body.note-body {
 }
 
 @media (max-width: 620px) {
+  .carousel {
+    width: auto;
+    margin-inline: calc(-1 * var(--gutter));
+  }
+
   .dock {
     gap: 0.15rem;
     padding: 0.32rem;

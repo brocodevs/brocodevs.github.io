@@ -240,8 +240,11 @@ function initMarquees() {
 
   buildAll();
 
+  let lastWidth = window.innerWidth;
   let resizeTimer = null;
   window.addEventListener("resize", () => {
+    if (window.innerWidth === lastWidth) return;
+    lastWidth = window.innerWidth;
     if (resizeTimer) clearTimeout(resizeTimer);
     resizeTimer = setTimeout(buildAll, 200);
   });
@@ -370,7 +373,7 @@ async function initNotes() {
     posts.forEach((post) => {
       const link = document.createElement("a");
       link.className = "note-card";
-      link.href = `/${post.slug}/`;
+      link.href = `/note/?slug=${encodeURIComponent(post.slug)}`;
 
       const body = document.createElement("span");
       const title = document.createElement("span");
@@ -407,6 +410,30 @@ function initLightbox() {
   const image = lightbox.querySelector(".lightbox-img");
   if (!image) return;
 
+  const ready = new Map();
+
+  function preloadPreview(src) {
+    if (!ready.has(src)) {
+      ready.set(
+        src,
+        new Promise((resolve) => {
+          const pre = new Image();
+          pre.decoding = "async";
+          pre.onload = () => {
+            if (typeof pre.decode === "function") {
+              pre.decode().then(resolve, resolve);
+            } else {
+              resolve();
+            }
+          };
+          pre.onerror = resolve;
+          pre.src = src;
+        }),
+      );
+    }
+    return ready.get(src);
+  }
+
   document.addEventListener("click", (event) => {
     const trigger =
       event.target && event.target.closest
@@ -417,9 +444,21 @@ function initLightbox() {
     event.preventDefault();
 
     const inner = trigger.querySelector("img");
-    image.src = trigger.getAttribute("href") || (inner ? inner.src : "");
-    image.alt = inner ? inner.alt : "";
+    const src = trigger.getAttribute("href") || (inner ? inner.src : "");
+    if (!src) return;
+    const alt = inner ? inner.alt : "";
+
+    if (image.getAttribute("src") !== src) {
+      image.removeAttribute("src");
+      image.alt = "";
+    }
+
     openOverlay(lightbox, trigger);
+
+    preloadPreview(src).then(() => {
+      image.src = src;
+      image.alt = alt;
+    });
   });
 
   closeOnBackdrop(lightbox);

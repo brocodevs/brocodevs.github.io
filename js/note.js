@@ -30,10 +30,9 @@ function renderMarkdown(markdown) {
   }
 }
 
-function slugFromPath() {
-  const path = window.location.pathname.replace(/index\.html$/, "");
-  const match = /^\/([^/]+?)(?:\.html)?\/?$/.exec(path);
-  return match ? decodeURIComponent(match[1]) : "";
+function slugFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return (params.get("slug") || "").trim();
 }
 
 function resolvePostImage(value) {
@@ -45,7 +44,7 @@ function resolvePostImage(value) {
 }
 
 async function loadNote() {
-  const slug = slugFromPath();
+  const slug = slugFromUrl();
   const titleEl = document.getElementById("note-title");
   const subtitleEl = document.getElementById("note-subtitle");
   const contentEl = document.getElementById("note-content");
